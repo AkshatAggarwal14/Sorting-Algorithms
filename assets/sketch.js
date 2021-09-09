@@ -5,7 +5,7 @@ let values = [];
 let I, J, div;
 let num;
 let mode = 0;
-let IPS; //iterations per second
+let IPF; //iterations per frame
 let minBars = 500,
     maxBars = 800;
 let stop = false;
@@ -14,7 +14,7 @@ function init() {
     I = 0;
     J = 0;
     num = floor(random(minBars, maxBars));
-    IPS = floor(0.85 * num);
+    IPF = floor(0.85 * num);
     values = new Array(num);
     for (let i = 0; i < values.length; i++) {
         values[i] = random(height);
