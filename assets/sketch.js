@@ -43,7 +43,7 @@ function draw() {
     background(0);
     /** Bubble sort */
     if (mode == 0) {
-        for (let n = 0; n < IPS; n++) { //100 swaps per draw else very slow
+        for (let n = 0; n < IPF; n++) { //100 swaps per draw else very slow
             /* code for one iteration */
             let a = values[J];
             let b = values[J + 1];
