@@ -32,12 +32,22 @@ function setup() {
     div.html('Bubble Sort');
 }
 
+function keyPressed() {
+    if (keyCode === ENTER && mode == 3) {
+        mode = 0;
+        init();
+        print("Restarting...");
+        div.html('Bubble Sort');
+        document.title = "Bubble Sort";
+        stop = false;
+        loop();
+    }
+}
+
 // Lets make different modes for different sorts
 // 0. Bubble sort
 // 1. Insertion sort
 // 2. Selection sort
-let time1 = 0;
-let time2 = 0;
 
 function draw() {
     background(0);
@@ -102,9 +112,10 @@ function draw() {
             fill(255, 0, 0);
             stroke(255);
             strokeWeight(2);
-            div.html('FINISHED');
+            div.html('FINISHED<br>Press "ENTER" to restart...');
             stop = true;
             print("Finished Selection sort");
+            mode = 3;
             // mode = 0; // So loop between all sorts
             // init();
             // div.html('Bubble Sort');
