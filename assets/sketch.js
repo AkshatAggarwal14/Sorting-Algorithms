@@ -61,6 +61,7 @@ function draw() {
                 mode = 1;
                 init();
                 div.html('Insertion Sort');
+                document.title = "Insertion Sort";
             }
         }
     }
@@ -82,6 +83,7 @@ function draw() {
             mode = 2; // So loop between both sorts
             init();
             div.html('Selection Sort');
+            document.title = "Selection Sort";
         }
     }
     /** Selection Sort */
