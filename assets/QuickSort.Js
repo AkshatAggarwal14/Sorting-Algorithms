@@ -46,7 +46,7 @@ function sleep(ms) {
 
 // Function to Swap
 async function Sswap(arr, a, b) {
-    await sleep(0.001);
+    await sleep(0.4);
     let temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
