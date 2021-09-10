@@ -10,8 +10,8 @@ function SSelection() {
         }
         swap(values, I, pos);
     } else {
-        endSorts("Selection Sort");
-        // setNext("Selection Sort", "Quick Sort");
+        // endSorts("Selection Sort");
+        setNext("Selection Sort", "Quick Sort");
     }
     I++;
 }

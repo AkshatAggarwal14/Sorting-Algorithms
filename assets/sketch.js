@@ -1,14 +1,15 @@
 /// <reference path="p5.global-mode.d.ts" />
 
 let values = []; // The array of random values
+let states = [];
 
-let I, J, div;
+let I, J, div, info;
 let num; // Number of bars [minBars, maxBars]
 let mode = 0; //for jumping between sorts
 let IPF; //iterations per frame
-let minBars = 500,
-    maxBars = 800;
-let stop = false;
+let minBars = 250,
+    maxBars = 500;
+let finish = false;
 
 // initialises the array to random values and sets I and J to 0
 function init() {
@@ -19,9 +20,9 @@ function init() {
     values = new Array(num);
     for (let i = 0; i < values.length; i++) {
         values[i] = random(height);
+        states[i] = -1; //false
         // values[i] = noise(i / 100.0) * height;
     }
-
 }
 
 // SETUP
@@ -32,17 +33,19 @@ function setup() {
     div.style('font-size', '24px');
     // div.style('color', '#FFFFFF'); div.center();
     div.html('Bubble Sort');
+    info = createDiv('').position(25, 52);
+    info.style('font-size', '13px');
+    info.html('Press "ENTER" to restart simulation...');
 }
 
 // Restart Simulation on "ENTER"
 function keyPressed() {
-    if (keyCode === ENTER && mode == 3) {
+    if (keyCode === ENTER) {
         mode = 0;
         init();
         print("Restarting...");
         div.html('Bubble Sort');
         document.title = "Bubble Sort";
-        stop = false;
         loop();
     }
 }
@@ -66,17 +69,24 @@ function swap(arr, a, b) {
 
 // Drawing the rectangles 
 function show() {
+    background(51);
     for (let i = 0; i < values.length; i++) {
-        stroke(255);
-        // fill(245, 222, 179);
-        if (stop) stroke(255, 0, 0);
         rectMode(CORNER);
+        if (states[i] == 0) {
+            fill('#ec6e6e');
+            stroke('#ec6e6e');
+        } else if (states[i] == 1) {
+            fill('#a6f7bb');
+            stroke('#a6f7bb');
+        } else {
+            fill(255);
+            stroke(255);
+        }
         rect(i * width / num, values[i], width / num, height - values[i]);
     }
-
-    if (stop) noLoop();
 }
 
+let cnt = 0;
 //!
 // DRAW
 function draw() {
@@ -87,8 +97,10 @@ function draw() {
         Insertion();
     } else if (mode == 2) {
         SSelection();
+    } else if (mode == 3 && cnt == 0) {
+        quickSort(values, 0, values.length - 1);
+        cnt++;
     }
-
     show();
 }
 
@@ -102,13 +114,11 @@ function setNext(prev, next) {
     document.title = next;
 }
 
-// Ending the simulation
-function endSorts(s) {
-    fill(255, 0, 0);
-    stroke(255);
-    strokeWeight(2);
-    div.html('FINISHED<br>Press "ENTER" to restart...');
-    stop = true;
-    print("Finished", s);
-    mode = 3;
+function isSorted(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] > arr[i + 1]) {
+            return false;
+        }
+    }
+    return true;
 }
