@@ -8,7 +8,7 @@ let num; // Number of bars [minBars, maxBars]
 let mode = 0; //for jumping between sorts
 let IPF; //iterations per frame
 let minBars = 250,
-    maxBars = 500;
+    maxBars = 750;
 let finish = false;
 
 // initialises the array to random values and sets I and J to 0
