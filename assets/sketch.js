@@ -35,17 +35,17 @@ function setup() {
     div.html('Bubble Sort');
     info = createDiv('').position(25, 52);
     info.style('font-size', '13px');
-    info.html('Press "ENTER" to restart simulation...');
 }
 
 // Restart Simulation on "ENTER"
 function keyPressed() {
-    if (keyCode === ENTER) {
+    if (keyCode === ENTER && mode == 3) {
         mode = 0;
         init();
         print("Restarting...");
         div.html('Bubble Sort');
         document.title = "Bubble Sort";
+        cnt = 0;
         loop();
     }
 }
@@ -92,12 +92,16 @@ let cnt = 0;
 function draw() {
     background(0);
     if (mode == 0) {
+        info.html(' ');
         Bubble();
     } else if (mode == 1) {
+        info.html(' ');
         Insertion();
     } else if (mode == 2) {
+        info.html(' ');
         SSelection();
     } else if (mode == 3 && cnt == 0) {
+        info.html('Press "ENTER" to restart simulation...');
         quickSort(values, 0, values.length - 1);
         cnt++;
     }
